@@ -71,11 +71,12 @@ async function convert(amount, from, to) {
     console.log(`Oh no, thre is on ${from} to convert ${to}, so let's get it!`);
     const rates = await fetchRates(from);
     rateByBase[from] = rates;
+    console.log(rates);
   }
 
   // Converting amount;
   const rate = rateByBase[from].rates[to];
-  console.log(rateByBase[form].rates[to]);
+  console.log(rateByBase[from].rates[to]);
   const convertedAmount = rate * amount;
   // console.log(`${amount} ${from} is ${convertedAmount} in ${to}`);
   return convertedAmount;
@@ -95,8 +96,8 @@ async function handleInput(e) {
   console.log(e.target);
   console.log(e.currentTarget);
   const rawAmount = await convert(
-    fromInput.nodeValue,
-    fromSelect.nodeValue,
+    fromInput.value,
+    fromSelect.value,
     toSelect.value
   );
   toEL.textContent = formatCurrency(rawAmount, toSelect.value);
